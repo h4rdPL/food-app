@@ -1,8 +1,15 @@
 export const theme = {
-  green: "#84FFB5",
-  greenGradient: "#97FF95",
-  blueGradient: "#9CDDF1",
+  yellowGradient: "#FFC107",
+  orangeGradiend: "#F44336",
+  background: "#E6E6E6",
   white: "#fff",
   black: "#000",
-  greenHighlight: "#ACFC90",
+  yellow: "#FBDE0B",
+  font: "Montserrat",
+  breakpoints: {
+    largeMobile: "650px",
+    tablet: "768px",
+    laptop: "992px",
+    desktop: "1200px",
+  },
 };

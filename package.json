@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@storybook/addon-decorator": "^6.2.9"
+  }
+}
