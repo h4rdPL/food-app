@@ -52,7 +52,7 @@ const Item = styled.li`
   }
   &:not(:first-child) {
     &:hover {
-      color: ${({ theme }) => theme.orangeGradiend};
+      color: ${({ theme }) => theme.orangeGradient};
     }
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {

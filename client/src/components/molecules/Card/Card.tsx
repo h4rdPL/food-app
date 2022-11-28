@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import Header from "components/atoms/Heading/Heading";
+import { Heading } from "components/atoms/Heading/Heading";
 import Paragraph from "components/atoms/Paragraph/Paragraph";
 import { CardProps } from "interfaces/Cards";
 const CardWrapper = styled.div`
@@ -13,6 +13,7 @@ const CardWrapper = styled.div`
   padding: 0 3.5rem;
   text-align: center;
   max-width: 341px;
+  /* transition: transform 0.3s ease-in-out; */
   &::before {
     content: "";
     position: absolute;
@@ -28,7 +29,9 @@ const CardWrapper = styled.div`
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
+    cursor: pointer;
   }
+
   ${({ active }) =>
     active &&
     css`
@@ -61,7 +64,7 @@ export const Card: React.FC<CardProps> = ({ icon, text, heading, active }) => {
     <>
       <CardWrapper active={active}>
         <Icon icon={icon} />
-        <Header>{heading}</Header>
+        <Heading>{heading}</Heading>
         <StyledParagraph>{text}</StyledParagraph>
       </CardWrapper>
     </>

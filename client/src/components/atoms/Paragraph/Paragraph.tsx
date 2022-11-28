@@ -8,6 +8,7 @@ const Paragraph = styled.p`
       color: red;
       font-weight: bold;
     `}
+
   @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {
     font-size: 1.6rem;
   }

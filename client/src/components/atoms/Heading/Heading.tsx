@@ -11,9 +11,10 @@ const Heading = styled.h1`
         font-size: 2.3rem;
       }
     `}
-  @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {
-    /* font-size: 3.125rem; */
-  }
 `;
 
-export default Heading;
+const SubHeading = styled.h2`
+  font-size: 1.2rem;
+`;
+
+export { Heading, SubHeading };

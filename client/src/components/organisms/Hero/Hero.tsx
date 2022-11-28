@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Heading from "components/atoms/Heading/Heading";
+import { Heading } from "components/atoms/Heading/Heading";
 import Paragraph from "components/atoms/Paragraph/Paragraph";
 import Button from "components/atoms/Button/Button";
 import shoppingOnline from "assets/images/online-shop.svg";
@@ -27,7 +27,7 @@ const HeroInner = styled.div`
   }
 `;
 const HeroImage = styled.img`
-  max-width: 400px;
+  max-width: 550px;
 `;
 
 export const Hero: React.FC = () => {
