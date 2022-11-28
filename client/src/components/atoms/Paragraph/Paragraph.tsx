@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 const Paragraph = styled.p`
-  font-size: 0.938rem;
+  font-size: 1.3rem;
   ${({ error }) =>
     error &&
     css`
@@ -9,7 +9,7 @@ const Paragraph = styled.p`
       font-weight: bold;
     `}
   @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
   }
 `;
 

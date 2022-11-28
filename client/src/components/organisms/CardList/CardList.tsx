@@ -9,6 +9,7 @@ const CardWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 90vh;
   gap: 2rem;
   @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {
     flex-direction: row;

@@ -21,7 +21,7 @@ const CardWrapper = styled.div`
     padding: 2px;
     background: linear-gradient(
       45deg,
-      ${({ theme }) => theme.orangeGradiend} -50%,
+      ${({ theme }) => theme.orangeGradient} -50%,
       ${({ theme }) => theme.yellowGradient} 220%
     );
     -webkit-mask: linear-gradient(#fff 0 0) content-box,
@@ -34,7 +34,7 @@ const CardWrapper = styled.div`
     css`
       background-image: linear-gradient(
         to right,
-        ${({ theme }) => theme.orangeGradiend} -50%,
+        ${({ theme }) => theme.orangeGradient} -50%,
         ${({ theme }) => theme.yellowGradient} 220%
       );
       border-radius: 50px;

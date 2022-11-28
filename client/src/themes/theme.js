@@ -1,6 +1,6 @@
 export const theme = {
   yellowGradient: "#FFC107",
-  orangeGradiend: "#F44336",
+  orangeGradient: "#F44336",
   background: "#E6E6E6",
   white: "#fff",
   black: "#000",

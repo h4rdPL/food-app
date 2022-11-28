@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 const Button = styled.button`
   background-image: linear-gradient(
     to right,
-    ${({ theme }) => theme.orangeGradiend} -50%,
+    ${({ theme }) => theme.orangeGradient} -50%,
     ${({ theme }) => theme.yellowGradient} 220%
   );
   border: none;
