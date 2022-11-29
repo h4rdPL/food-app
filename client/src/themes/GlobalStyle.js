@@ -40,5 +40,7 @@ export const GlobalStyle = createGlobalStyle`
     button {
         font-family: "Montserrat";
     }
-
+    textarea {
+        font-family: "Montserrat";
+    }
 `;

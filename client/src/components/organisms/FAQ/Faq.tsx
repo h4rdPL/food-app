@@ -40,13 +40,17 @@ const StyledParagraph = styled(Paragraph)`
   overflow: hidden;
   max-height: 0px;
   font-size: 1rem;
-  width: 35%;
+  width: 75%;
   transition: all 0.5s ease-in-out;
   ${({ isOpen }) =>
     isOpen &&
     css`
       max-height: 300px;
     `}
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {
+    width: 50%;
+  }
 `;
 
 export const Faq: React.FC = () => {
