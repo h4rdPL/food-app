@@ -13,13 +13,5 @@ function Template(args: any) {
     </Paragraph>
   );
 }
-function ErrorTemplate(args: any) {
-  return (
-    <Paragraph error {...args}>
-      Wygląda na to, że nie jesteś zalogowany. Zaloguj się, aby skorzystać z
-      aplikacji.
-    </Paragraph>
-  );
-}
+
 export const Primary = Template.bind({});
-export const Secondary = ErrorTemplate.bind({});

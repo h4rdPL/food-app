@@ -10,7 +10,9 @@ const RegisterWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  max-width: 600px;
   padding: 0 2rem;
+  margin: 0 auto;
 `;
 
 const RegisterInner = styled.span`
