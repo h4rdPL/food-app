@@ -4,6 +4,7 @@ import facebook from "assets/images/icons/facebook.svg";
 import twitter from "assets/images/icons/twitter.svg";
 import instagram from "assets/images/icons/instagram.svg";
 import ButtonIcon from "components/atoms/ButtonIcon/ButtonIcon";
+import { Link } from "react-router-dom";
 const FooterWrapper = styled.footer`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -73,13 +74,17 @@ export const Footer: React.FC = () => {
           <ItemLink>Firma</ItemLink>
         </Item>
         <Item>
-          <ItemLink>Strona główna</ItemLink>
+          <Link to="/">
+            <ItemLink>Strona główna</ItemLink>
+          </Link>
         </Item>
         <Item>
           <ItemLink>O nas</ItemLink>
         </Item>
         <Item>
-          <ItemLink>Kontakt</ItemLink>
+          <Link to="/contact">
+            <ItemLink>Kontakt</ItemLink>
+          </Link>
         </Item>
       </List>
       <List>
@@ -95,10 +100,14 @@ export const Footer: React.FC = () => {
           <ItemLink>Dołącz do nas!</ItemLink>
         </Item>
         <Item>
-          <ItemLink>Zaloguj się</ItemLink>
+          <Link to="/login">
+            <ItemLink>Zaloguj się</ItemLink>
+          </Link>
         </Item>
         <Item>
-          <ItemLink>Zarejestruj się</ItemLink>
+          <Link to="/register">
+            <ItemLink>Zarejestruj się</ItemLink>
+          </Link>
         </Item>
       </List>
       <List socialIconsList>

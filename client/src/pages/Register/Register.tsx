@@ -3,13 +3,16 @@ import { Heading } from "components/atoms/Heading/Heading";
 import { Label } from "components/atoms/Label/Label";
 import Button from "components/atoms/Button/Button";
 import Input from "components/atoms/Input/Input";
+import { MyNavigation } from "components/organisms/Navigation/Navigation";
+import { Footer } from "components/organisms/Footer/Footer";
 
-const RegisterWrapper = styled.div`
+const RegisterWrapper = styled.section`
   display: flex;
   gap: 1.2rem;
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  min-height: 80vh;
   max-width: 600px;
   padding: 0 2rem;
   margin: 0 auto;
@@ -41,21 +44,29 @@ const StyledHeading = styled(Heading)`
 
 export const Register = () => {
   return (
-    <RegisterWrapper>
-      <StyledHeading title>Zarejestruj się</StyledHeading>
-      <Input form placeholder="Email" />
-      <Input form placeholder="Imię" />
-      <Input form placeholder="Hasło" />
-      <Input form placeholder="Powtórz hasło" />
-      <RegisterInner>
-        <Testing>
-          <StyledInput type="checkbox" name="registerType" id="registerType" />
-          <Label for="registerType">
-            Zarejestruj się jako partner biznesowy
-          </Label>
-        </Testing>
-        <Button>Zarejestruj się!</Button>
-      </RegisterInner>
-    </RegisterWrapper>
+    <>
+      <MyNavigation />
+      <RegisterWrapper>
+        <StyledHeading title>Zarejestruj się</StyledHeading>
+        <Input form placeholder="Email" />
+        <Input form placeholder="Imię" />
+        <Input form placeholder="Hasło" />
+        <Input form placeholder="Powtórz hasło" />
+        <RegisterInner>
+          <Testing>
+            <StyledInput
+              type="checkbox"
+              name="registerType"
+              id="registerType"
+            />
+            <Label for="registerType">
+              Zarejestruj się jako partner biznesowy
+            </Label>
+          </Testing>
+          <Button>Zarejestruj się!</Button>
+        </RegisterInner>
+      </RegisterWrapper>
+      <Footer />
+    </>
   );
 };

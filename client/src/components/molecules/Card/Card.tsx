@@ -13,7 +13,7 @@ const CardWrapper = styled.div`
   padding: 0 3.5rem;
   text-align: center;
   max-width: 341px;
-  /* transition: transform 0.3s ease-in-out; */
+  transition: transform 0.3s ease-in-out;
   &::before {
     content: "";
     position: absolute;
@@ -46,6 +46,9 @@ const CardWrapper = styled.div`
         background: transparent;
       }
     `}
+  &:hover {
+    transform: scale(1.02);
+  }
 `;
 
 const StyledParagraph = styled(Paragraph)`

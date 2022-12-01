@@ -1,13 +1,16 @@
 import Button from "components/atoms/Button/Button";
 import { Heading } from "components/atoms/Heading/Heading";
 import Input from "components/atoms/Input/Input";
+import { Footer } from "components/organisms/Footer/Footer";
+import { MyNavigation } from "components/organisms/Navigation/Navigation";
 import styled from "styled-components";
 
-const LoginWrapper = styled.div`
+const LoginWrapper = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 80vh;
   text-align: center;
 `;
 const LoginInner = styled.form`
@@ -27,13 +30,17 @@ const StyledButton = styled(Button)`
 
 export const Login = () => {
   return (
-    <LoginWrapper>
-      <LoginInner>
-        <StyledHeading title>Zaloguj się</StyledHeading>
-        <Input form placeholder="Email" />
-        <Input form placeholder="Hasło" />
-        <StyledButton>Zaloguj się</StyledButton>
-      </LoginInner>
-    </LoginWrapper>
+    <>
+      <MyNavigation />
+      <LoginWrapper>
+        <LoginInner>
+          <StyledHeading title>Zaloguj się</StyledHeading>
+          <Input form placeholder="Email" />
+          <Input form placeholder="Hasło" />
+          <StyledButton>Zaloguj się</StyledButton>
+        </LoginInner>
+      </LoginWrapper>
+      <Footer />
+    </>
   );
 };

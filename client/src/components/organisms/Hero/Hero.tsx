@@ -5,7 +5,7 @@ import Button from "components/atoms/Button/Button";
 import shoppingOnline from "assets/images/online-shop.svg";
 import { Span } from "components/atoms/Span/Span";
 import { useState } from "react";
-const HeroWrapper = styled.div`
+const HeroWrapper = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -43,9 +43,9 @@ export const Hero: React.FC = () => {
           </Heading>
           <Paragraph>Dołącz do nas już teraz!</Paragraph>
           <Button>Zamów online</Button>
-          {
-            isLogin && <Span error>Wygląda na to, że nie jesteś zalogowany!</Span>
-          }
+          {isLogin && (
+            <Span error>Wygląda na to, że nie jesteś zalogowany!</Span>
+          )}
         </HeroInner>
         <HeroImage src={shoppingOnline} />
       </HeroWrapper>

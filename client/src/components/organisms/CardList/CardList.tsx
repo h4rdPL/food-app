@@ -4,7 +4,7 @@ import clock from "assets/images/icons/clock.svg";
 import money from "assets/images/icons/money.svg";
 import security from "assets/images/icons/security.svg";
 
-const CardWrapper = styled.div`
+const CardWrapper = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,7 +16,7 @@ const CardWrapper = styled.div`
   }
 `;
 
-export const CardList = () => {
+export const CardList: React.FC = () => {
   return (
     <CardWrapper>
       <Card

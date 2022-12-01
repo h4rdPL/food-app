@@ -5,7 +5,7 @@ import { Heading, SubHeading } from "components/atoms/Heading/Heading";
 import Paragraph from "components/atoms/Paragraph/Paragraph";
 import add from "assets/images/icons/add.svg";
 import hide from "assets/images/icons/hide.svg";
-const FaqWrapper = styled.div`
+const FaqWrapper = styled.section`
   text-align: center;
   min-height: 50vh;
   margin: 0 auto;
@@ -14,7 +14,9 @@ const FaqWrapper = styled.div`
     width: 50%;
   }
 `;
-const FaqInner = styled.div``;
+const FaqInner = styled.div`
+  margin: 0.7rem 0;
+`;
 
 const FaqQuestionWrapper = styled.div`
   display: flex;

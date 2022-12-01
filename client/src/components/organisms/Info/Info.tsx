@@ -4,8 +4,7 @@ import styled from "styled-components";
 import order from "assets/images/online-shop.svg";
 import car from "assets/images/car.svg";
 import eat from "assets/images/eat.svg";
-import { MyNavigation } from "../Navigation/Navigation";
-const InfoWrapper = styled.div`
+const InfoWrapper = styled.section`
   text-align: center;
 `;
 

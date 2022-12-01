@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import Button from "components/atoms/Button/Button";
 import logo from "assets/images/logo-color.svg";
+import { Link } from "react-router-dom";
 const Navigation = styled.nav`
   display: flex;
   justify-content: space-between;
@@ -125,7 +126,7 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-const NavLink = styled.a`
+const NavLink = styled(Link)`
   cursor: pointer;
 `;
 
@@ -137,26 +138,34 @@ export const MyNavigation = () => {
   };
   return (
     <Navigation>
-      <Logo src={logo} alt="Logo" />
+      <Link to="/">
+        <Logo src={logo} alt="Logo" />
+      </Link>
       <Hamburger onClick={handleClick} isActive={isActive} />
       <NavWrapper isActive={isActive}>
         <NavList>
           <NavItem>
-            <NavLink>Strona główna</NavLink>
+            <NavLink to="/">Strona główna</NavLink>
           </NavItem>
           <NavItem>
             <NavItem>
-              <NavLink>Nasza flota</NavLink>
+              <NavLink as={Link} to="/fleet">
+                Nasza flota
+              </NavLink>
             </NavItem>
           </NavItem>
           <NavItem>
             <NavItem>
-              <NavLink>Kontakt</NavLink>
+              <NavLink to="/contact">Kontakt</NavLink>
             </NavItem>
           </NavItem>
           <ButtonWrapper>
-            <Button>Zaloguj się</Button>
-            <Button>Zarejestruj się</Button>
+            <Link to="/login">
+              <Button>Zaloguj się</Button>
+            </Link>
+            <Link to="/register">
+              <Button>Zarejestruj się</Button>
+            </Link>
           </ButtonWrapper>
         </NavList>
       </NavWrapper>
