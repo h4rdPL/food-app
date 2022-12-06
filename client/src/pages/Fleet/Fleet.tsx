@@ -45,27 +45,27 @@ const StyledHeading = styled(Heading)`
 `;
 
 export const Fleet = () => {
-  return (
-    <>
-      <MyNavigation />
-      <FleetWrapper>
-        <StyledHeading>Nasza flota</StyledHeading>
-        <FleetInner>
-          <Item>
-            <Paragraph>Szybkie samochody</Paragraph>
-            <Image src={car} />
-          </Item>
-          <Item>
-            <Paragraph>Motocykle</Paragraph>
-            <Image src={motorcycle} />
-          </Item>
-          <Item>
-            <Paragraph>Hulajnogi elektryczne</Paragraph>
-            <Image src={scooter} />
-          </Item>
-        </FleetInner>
-      </FleetWrapper>
-      <Footer />
-    </>
-  );
+    return (
+        <>
+            <MyNavigation />
+            <FleetWrapper>
+                <StyledHeading>Nasza flota</StyledHeading>
+                <FleetInner>
+                    <Item>
+                        <Paragraph>Szybkie samochody</Paragraph>
+                        <Image src={car} />
+                    </Item>
+                    <Item>
+                        <Paragraph>Motocykle</Paragraph>
+                        <Image src={motorcycle} />
+                    </Item>
+                    <Item>
+                        <Paragraph>Hulajnogi elektryczne</Paragraph>
+                        <Image src={scooter} />
+                    </Item>
+                </FleetInner>
+            </FleetWrapper>
+            <Footer />
+        </>
+    );
 };
