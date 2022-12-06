@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { baseStyle } from "helpers/styles/mixins";
 // eslint-disable-next-line no-undef
 const Button = styled.button`
   background-image: linear-gradient(
@@ -6,16 +7,22 @@ const Button = styled.button`
     ${({ theme }) => theme.orangeGradient} -50%,
     ${({ theme }) => theme.yellowGradient} 220%
   );
-  border: none;
-  border-radius: 60px;
-  padding: 0.75rem 1.3rem;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: box-shadow 0.3s ease-in-out;
-  &:hover {
-    -webkit-box-shadow: 1px 10px 26px -10px rgba(66, 68, 90, 1);
-    -moz-box-shadow: 1px 10px 26px -10px rgba(66, 68, 90, 1);
-    box-shadow: 1px 10px 26px -10px rgba(66, 68, 90, 1);
+  ${baseStyle}
+  &::-webkit-file-upload-button {
+    content: "Select some files";
+    color: black;
+    display: inline-block;
+    background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
   }
   ${({ secondary }) =>
     secondary &&
