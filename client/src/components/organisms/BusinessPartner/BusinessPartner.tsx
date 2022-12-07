@@ -40,12 +40,12 @@ export const BusinessPartner = () => {
           <Paragraph>Dodaj restaurację</Paragraph>
           <Input form placeholder="Nazwa restauracji" />
           <Input form placeholder="Rodzaj dań" />
-          {/* <StyledButton secondary>Dodaj zdjęcie</StyledButton> */}
           <Input file type="file" />
           <StyledButton>Dodaj</StyledButton>
         </Form>
         <Form>
           <Paragraph>Dodaj danie</Paragraph>
+          <Input form placeholder="Nazwa restauracji (taka jak dodano)" />
           <Input form placeholder="Nazwa dania" />
           <Input form placeholder="koszt dania" />
           <Input file type="file" />
