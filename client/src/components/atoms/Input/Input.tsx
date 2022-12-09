@@ -8,7 +8,7 @@ const Input = styled.input`
   border-radius: 25px;
   border: none;
   background-image: url(${img});
-  background-position: 90%;
+  background-position: 95%;
   background-size: 15px;
   min-width: 300px;
   background-repeat: no-repeat;

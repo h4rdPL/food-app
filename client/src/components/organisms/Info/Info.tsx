@@ -48,11 +48,15 @@ const Image = styled.img`
     margin: 0;
   }
 `;
+
+const StyledHeading = styled(Heading)`
+  margin: 2rem auto;
+`;
 export const Info: React.FC = () => {
   return (
     <>
       <InfoWrapper>
-        <Heading title>Jak działamy?</Heading>
+        <StyledHeading title>Jak działamy?</StyledHeading>
         <InfoInnerWrapper>
           <Order>
             <Paragraph>1. Zamawiasz</Paragraph>

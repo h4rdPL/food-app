@@ -4,12 +4,13 @@ import Button from "components/atoms/Button/Button";
 import logo from "assets/images/logo-color.svg";
 import { Link } from "react-router-dom";
 const Navigation = styled.nav`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
   padding: 2rem;
   width: 100%;
+  z-index: 999;
   @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {
     justify-content: space-around;
     padding: 0;
@@ -69,7 +70,7 @@ const NavWrapper = styled.div`
   align-items: stretch;
   width: 100%;
   position: absolute;
-  top: 110%;
+  top: 100%;
   left: 0;
   background-color: ${({ theme }) => theme.white};
   color: ${({ theme }) => theme.black};
@@ -77,6 +78,7 @@ const NavWrapper = styled.div`
   border-radius: 5px;
   transform: translateY(-150%);
   transition: transform 0.39s ease-in-out;
+  z-index: 99;
   @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {
     position: relative;
     flex-direction: row;
@@ -130,6 +132,18 @@ const NavLink = styled(Link)`
   cursor: pointer;
 `;
 
+const StyledButton = styled(Button)`
+  width: 100%;
+`;
+
+const StyledLink = styled(Link)`
+  transition: color 0.3s ease-in-out;
+  color: ${({ theme }) => theme.black};
+  &:hover {
+    color: ${({ theme }) => theme.orangeGradient};
+  }
+`;
+
 export const MyNavigation = () => {
   const [isActive, setIsActive] = useState(false);
   const handleClick = () => {
@@ -145,27 +159,27 @@ export const MyNavigation = () => {
       <NavWrapper isActive={isActive}>
         <NavList>
           <NavItem>
-            <NavLink to="/">Strona główna</NavLink>
+            <StyledLink to="/">Strona główna</StyledLink>
           </NavItem>
           <NavItem>
             <NavItem>
-              <NavLink as={Link} to="/fleet">
+              <StyledLink as={Link} to="/fleet">
                 Nasza flota
-              </NavLink>
+              </StyledLink>
             </NavItem>
           </NavItem>
           <NavItem>
             <NavItem>
-              <NavLink to="/contact">Kontakt</NavLink>
+              <StyledLink to="/contact">Kontakt</StyledLink>
             </NavItem>
           </NavItem>
           <ButtonWrapper>
-            <Link to="/login">
-              <Button>Zaloguj się</Button>
-            </Link>
-            <Link to="/register">
-              <Button>Zarejestruj się</Button>
-            </Link>
+            <StyledLink to="/login">
+              <StyledButton>Zaloguj się</StyledButton>
+            </StyledLink>
+            <StyledLink to="/register">
+              <StyledButton>Zarejestruj się</StyledButton>
+            </StyledLink>
           </ButtonWrapper>
         </NavList>
       </NavWrapper>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Paragraph from "components/atoms/Paragraph/Paragraph";
 import Button from "components/atoms/Button/Button";
 import shoppingOnline from "assets/images/online-shop.svg";
@@ -36,6 +36,15 @@ const HeroImage = styled.img`
 `;
 
 // modal
+const modalAnimation = keyframes`
+0% {
+  transform: scale(0);
+}
+100% {
+  transform: scale(100%);
+}
+`;
+
 const ModalWrapper = styled.div`
   position: absolute;
   top: 0;
@@ -52,6 +61,7 @@ const ModalWrapper = styled.div`
   margin: 0px auto;
   text-align: center;
   background-color: ${({ theme }) => theme.background};
+  animation: ${modalAnimation} 0.4s;
 `;
 const Image = styled.img`
   width: 32px;
@@ -60,16 +70,33 @@ const Image = styled.img`
   right: 30px;
   cursor: pointer;
 `;
-
-export const Hero: React.FC = (props) => {
+const SearchOrderWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {
+    flex-direction: row;
+  }
+`;
+export const Hero: React.FC = () => {
   const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<any>(false);
   const closeModal = () => {
     setIsOpen(!isOpen);
-  }
+  };
   const openModal = () => {
-    setIsOpen(!isOpen)
-  }
+    setIsOpen(!isOpen);
+  };
+
+  const searchRestaurant = () => {
+    console.log("hey");
+    if (!isLogin) {
+      setIsOpen(!isOpen);
+      setError(true);
+    }
+  };
+
   return (
     <>
       <HeroWrapper>
@@ -79,14 +106,15 @@ export const Hero: React.FC = (props) => {
           </Heading>
           <Paragraph>Dołącz do nas już teraz!</Paragraph>
           <Button onClick={openModal}> Zamów online</Button>
-          {isLogin && (
-            <Span error>Wygląda na to, że nie jesteś zalogowany!</Span>
-          )}
+          {error && <Span error>Wygląda na to, że nie jesteś zalogowany!</Span>}
           {isOpen && (
             <ModalWrapper>
               <Image onClick={closeModal} src={close} />
               <Heading>Gdzie chcesz zamówić jedzenie?</Heading>
-              <Input placeholder="Np. Nowy Targ" />
+              <SearchOrderWrapper>
+                <Input placeholder="Np. Nowy Targ" />
+                <Button onClick={searchRestaurant}>Szukaj restauracji</Button>
+              </SearchOrderWrapper>
             </ModalWrapper>
           )}
         </HeroInner>

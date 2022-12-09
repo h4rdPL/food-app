@@ -9,6 +9,7 @@ const ContactWrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   min-height: 80vh;
   text-align: center;
 `;

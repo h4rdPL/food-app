@@ -65,6 +65,13 @@ const ItemLink = styled.a`
   transition: color 0.3s ease-in-out;
 `;
 
+const StyledLink = styled(Link)`
+  transition: color 0.3s ease-in-out;
+  color: ${({ theme }) => theme.black};
+  &:hover {
+    color: ${({ theme }) => theme.orangeGradient};
+  }
+`;
 export const Footer: React.FC = () => {
   return (
     <FooterWrapper>
@@ -74,17 +81,17 @@ export const Footer: React.FC = () => {
           <ItemLink>Firma</ItemLink>
         </Item>
         <Item>
-          <Link to="/">
+          <StyledLink to="/">
             <ItemLink>Strona główna</ItemLink>
-          </Link>
+          </StyledLink>
         </Item>
         <Item>
           <ItemLink>O nas</ItemLink>
         </Item>
         <Item>
-          <Link to="/contact">
+          <StyledLink to="/contact">
             <ItemLink>Kontakt</ItemLink>
-          </Link>
+          </StyledLink>
         </Item>
       </List>
       <List>
@@ -100,14 +107,14 @@ export const Footer: React.FC = () => {
           <ItemLink>Dołącz do nas!</ItemLink>
         </Item>
         <Item>
-          <Link to="/login">
+          <StyledLink to="/login">
             <ItemLink>Zaloguj się</ItemLink>
-          </Link>
+          </StyledLink>
         </Item>
         <Item>
-          <Link to="/register">
+          <StyledLink to="/register">
             <ItemLink>Zarejestruj się</ItemLink>
-          </Link>
+          </StyledLink>
         </Item>
       </List>
       <List socialIconsList>

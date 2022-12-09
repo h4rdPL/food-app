@@ -5,19 +5,17 @@ import restaurant from "assets/images/restaurant.jpg";
 import { Heading } from "components/atoms/Heading/Heading";
 import { Span } from "components/atoms/Span/Span";
 import { DishesCard } from "interfaces/DishesCard";
-const RestaurantCardWrapper = styled.section`
+
+const Card = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 3rem;
-`;
-const CardInner = styled.div`
-  display: flex;
   position: relative;
   cursor: pointer;
-  width: 90%;
+  width: 70%;
+  @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {
+    flex-direction: row;
+  }
   &::before {
-    overflow: hidden;
     content: "";
     position: absolute;
     inset: 0;
@@ -39,9 +37,12 @@ const CardInner = styled.div`
   }
 `;
 const Image = styled.img`
-  max-width: 290px;
   max-height: 220px;
-  border-radius: 50px 0 0 50px;
+  border-radius: 50px 50px 0 0;
+  @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {
+    max-width: 290px;
+    border-radius: 50px 0 0 50px;
+  }
   ${({ icon }) =>
     icon &&
     css`
@@ -51,10 +52,15 @@ const Image = styled.img`
 
 const CardDetail = styled.div`
   display: flex;
+  gap: 1rem;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1.5rem 2rem;
   width: 100%;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {
+    text-align: left;
+  }
 `;
 
 const InnerCardDetail = styled.div`
@@ -72,35 +78,31 @@ const InnerCardDetail = styled.div`
 
 export const RestaurantCardList: React.FC = () => {
   return (
-    <RestaurantCardWrapper>
-      <CardInner>
-        <Image src={restaurant} />
-        <CardDetail>
-          <Heading>Restaurant</Heading>
-          <InnerCardDetail>
-            <Span restaurant>10,00 pln</Span>
-            <Span restaurant>Obiad, śniadania</Span>
-            <Span restaurant>Kraków</Span>
-          </InnerCardDetail>
-        </CardDetail>
-      </CardInner>
-    </RestaurantCardWrapper>
+    <Card>
+      <Image src={restaurant} />
+      <CardDetail>
+        <Heading>Restaurant</Heading>
+        <InnerCardDetail isDishes={false}>
+          <Span restaurant>10,00 pln</Span>
+          <Span restaurant>Obiad, śniadania</Span>
+          <Span restaurant>Kraków</Span>
+        </InnerCardDetail>
+      </CardDetail>
+    </Card>
   );
 };
 
-export const DishesCardList: React.FC<DishesCard> = ({ isDishes }) => {
+export const DishesCardList: React.FC<DishesCard> = () => {
   return (
-    <RestaurantCardWrapper>
-      <CardInner>
-        <Image src={restaurant} />
-        <CardDetail>
-          <Heading>Hamburger</Heading>
-          <InnerCardDetail isDishes={isDishes}>
-            <Span restaurant>10,00 pln</Span>
-            <Image icon src={add} />
-          </InnerCardDetail>
-        </CardDetail>
-      </CardInner>
-    </RestaurantCardWrapper>
+    <Card>
+      <Image src={restaurant} />
+      <CardDetail>
+        <Heading>Hamburger</Heading>
+        <InnerCardDetail isDishes={true}>
+          <Span restaurant>10,00 pln</Span>
+          <Image icon src={add} />
+        </InnerCardDetail>
+      </CardDetail>
+    </Card>
   );
 };
