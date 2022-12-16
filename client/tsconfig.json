@@ -15,9 +15,13 @@
     "isolatedModules": true,
     // adding absolute path to project
     "baseUrl": "src",
+    //babel
     "noEmit": true,
+    "types": ["jest", "node"],
     "jsx": "preserve",
     //removing error for themeProvider import
     "noImplicitAny": false
-  }
+  },
+  "exclude": ["**/*.(spec|test).ts", "node_modules"],
+  "include": ["./src/**/*"]
 }

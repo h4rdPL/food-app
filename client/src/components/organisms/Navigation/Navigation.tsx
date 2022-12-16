@@ -148,7 +148,6 @@ export const MyNavigation = () => {
   const [isActive, setIsActive] = useState(false);
   const handleClick = () => {
     setIsActive(!isActive);
-    console.log(isActive);
   };
   return (
     <Navigation>
@@ -159,25 +158,25 @@ export const MyNavigation = () => {
       <NavWrapper isActive={isActive}>
         <NavList>
           <NavItem>
-            <StyledLink to="/">Strona główna</StyledLink>
+            <StyledLink as={Link} to="/">
+              Strona główna
+            </StyledLink>
           </NavItem>
           <NavItem>
-            <NavItem>
-              <StyledLink as={Link} to="/fleet">
-                Nasza flota
-              </StyledLink>
-            </NavItem>
+            <StyledLink as={Link} to="/fleet">
+              Nasza flota
+            </StyledLink>
           </NavItem>
           <NavItem>
-            <NavItem>
-              <StyledLink to="/contact">Kontakt</StyledLink>
-            </NavItem>
+            <StyledLink as={Link} to="/contact">
+              Kontakt
+            </StyledLink>
           </NavItem>
           <ButtonWrapper>
-            <StyledLink to="/login">
+            <StyledLink as={Link} to="/login">
               <StyledButton>Zaloguj się</StyledButton>
             </StyledLink>
-            <StyledLink to="/register">
+            <StyledLink as={Link} to="/register">
               <StyledButton>Zarejestruj się</StyledButton>
             </StyledLink>
           </ButtonWrapper>

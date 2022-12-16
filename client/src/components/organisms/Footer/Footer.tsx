@@ -81,17 +81,13 @@ export const Footer: React.FC = () => {
           <ItemLink>Firma</ItemLink>
         </Item>
         <Item>
-          <StyledLink to="/">
-            <ItemLink>Strona główna</ItemLink>
-          </StyledLink>
+          <StyledLink to="/">Strona główna</StyledLink>
         </Item>
         <Item>
           <ItemLink>O nas</ItemLink>
         </Item>
         <Item>
-          <StyledLink to="/contact">
-            <ItemLink>Kontakt</ItemLink>
-          </StyledLink>
+          <StyledLink to="/contact">Kontakt</StyledLink>
         </Item>
       </List>
       <List>
@@ -107,14 +103,10 @@ export const Footer: React.FC = () => {
           <ItemLink>Dołącz do nas!</ItemLink>
         </Item>
         <Item>
-          <StyledLink to="/login">
-            <ItemLink>Zaloguj się</ItemLink>
-          </StyledLink>
+          <StyledLink to="/login">Zaloguj się</StyledLink>
         </Item>
         <Item>
-          <StyledLink to="/register">
-            <ItemLink>Zarejestruj się</ItemLink>
-          </StyledLink>
+          <StyledLink to="/register">Zarejestruj się</StyledLink>
         </Item>
       </List>
       <List socialIconsList>
