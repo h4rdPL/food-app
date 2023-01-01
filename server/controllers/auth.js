@@ -31,7 +31,6 @@ export const register = (req, res) => {
 // login
 export const login = (req, res) => {
   const q = "SELECT * FROM users WHERE email = ?";
-
   db.query(q, [req.body.email], (err, data) => {
     if (err) return res.status(500).json(err);
     if (data.length === 0) return res.status(404).json("User not found!");
@@ -47,18 +46,27 @@ export const login = (req, res) => {
 
     // const sessionToken = uuidv4();
     // const token = jwt.sign({ id: data[0].id }, "jwtkey");
-    const token = jwt.sign(req.body.email, "jwtkey");
+    // const token = jwt.sign(req.body.email, "jwtkey");
+    // const { password, ...other } = data[0];
+
+    const token = jwt.sign({ id: data[0].id }, "jwtkey");
     const { password, ...other } = data[0];
 
-    let options = {
-      maxAge: 1000 * 60 * 15, // would expire after 15 minutes
-      httpOnly: true, // The cookie only accessible by the web server
-    };
-
-    // Set cookie
-    res.cookie(`Cookie token name`, `encrypted cookie string Value`);
-    res.send("Cookie have been saved successfully");
+    res
+      .cookie("access_token", token, {
+        httpOnly: true,
+      })
+      .status(200)
+      .json(other);
+    console.log(req.body);
   });
-  console.dir(req.cookies);
 };
-export const logout = (req, res) => {};
+
+export const logout = (req, res) => {
+  res
+    .clearCookie("access_token", {
+      secure: true,
+    })
+    .status(200)
+    .json("user has been logged out");
+};

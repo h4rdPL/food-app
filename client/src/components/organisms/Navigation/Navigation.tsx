@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled, { css } from "styled-components";
 import Button from "components/atoms/Button/Button";
 import logo from "assets/images/logo-color.svg";
 import { Link } from "react-router-dom";
+import { AuthContext } from "context/authContext";
+import { useShoppingCart } from "context/shoppingCartContext";
 const Navigation = styled.nav`
   position: relative;
   display: flex;
@@ -128,12 +130,18 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-const NavLink = styled(Link)`
-  cursor: pointer;
-`;
+// const NavLink = styled(Link)`
+//   cursor: pointer;
+// `;
 
 const StyledButton = styled(Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+  @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {
+    width: fit-content;
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -149,6 +157,10 @@ export const MyNavigation = () => {
   const handleClick = () => {
     setIsActive(!isActive);
   };
+  const { currentUser, logout } = useContext(AuthContext);
+  // const { cartQuantity } = useContext(useShoppingCart);
+  const { cartQuantity } = useShoppingCart();
+
   return (
     <Navigation>
       <Link to="/">
@@ -173,12 +185,29 @@ export const MyNavigation = () => {
             </StyledLink>
           </NavItem>
           <ButtonWrapper>
-            <StyledLink as={Link} to="/login">
-              <StyledButton>Zaloguj się</StyledButton>
-            </StyledLink>
-            <StyledLink as={Link} to="/register">
-              <StyledButton>Zarejestruj się</StyledButton>
-            </StyledLink>
+            {currentUser ? (
+              <StyledLink as={Link} to="/">
+                <StyledButton onClick={() => logout()}>
+                  Wyloguj się
+                </StyledButton>
+              </StyledLink>
+            ) : (
+              <StyledLink as={Link} to="/login">
+                <StyledButton>Zaloguj się</StyledButton>
+              </StyledLink>
+            )}
+            {currentUser ? (
+              <StyledButton as={Link} to="/profile">
+                {currentUser && <span>{cartQuantity}</span>}
+                {currentUser.isBusinessPartner
+                  ? "Moja restauracja"
+                  : "Mój koszyk"}
+              </StyledButton>
+            ) : (
+              <StyledButton as={Link} to="/register">
+                Zarejestruj się
+              </StyledButton>
+            )}
           </ButtonWrapper>
         </NavList>
       </NavWrapper>

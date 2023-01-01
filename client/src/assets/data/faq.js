@@ -3,27 +3,27 @@ export const faqQuestions = [
     id: 1,
     question: "Na jakim terenie działamy?",
     answer:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+      "Działamy na terenie całej Polski, zamów zamówienie tam, gdzie Ci jest wygodnie ",
     isOpen: false,
   },
   {
     id: 2,
     question: "Czy można zamówić jedzenie w lokalu stacjonarnym?",
     answer:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "Na ten moment ta opcja nie jest dostępna, jednak w przyszłości zrobimy listę najlepszych restauracji w okolicy, abyś zjadł to co najlepsze w okolicy",
     isOpen: false,
   },
   {
     id: 3,
     question: "Jaki jest średni czas oczekiwania na zamówienie?",
-    answer: "Czy są obierane jakieś opłaty przez food.pl?",
+    answer: "Wszystko zależy od restauracji oraz dania, które zamówisz. ",
     isOpen: false,
   },
   {
     id: 4,
-    question: "Czy można zamówić jedzenie w lokalu stacjonarnym?",
+    question: "Czy są obierane jakieś opłaty przez food.pl?",
     answer:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "Nie, jest to całkowicie darmowe. Jedyne opłaty jakie pobieramy są od restauracji, które z nami współpracują.",
     isOpen: false,
   },
 ];

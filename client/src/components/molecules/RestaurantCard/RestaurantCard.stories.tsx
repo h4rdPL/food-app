@@ -6,11 +6,15 @@ export default {
 };
 
 const Template = () => {
-  return <RestaurantCardList />;
+  return (
+    <RestaurantCardList name="sda" type="pizza" city="asd" restaurantId={`2`} />
+  );
 };
 
 const SecondTemplate = () => {
-  return <DishesCardList isDishes={true} />;
+  return (
+    <DishesCardList isDishes={true} id={1} dishName="sushi" dishPrice={25} />
+  );
 };
 
 export const Primary = Template.bind({});

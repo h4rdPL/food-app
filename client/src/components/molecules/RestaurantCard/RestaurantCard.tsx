@@ -5,6 +5,8 @@ import restaurant from "assets/images/restaurant.jpg";
 import { Heading } from "components/atoms/Heading/Heading";
 import { Span } from "components/atoms/Span/Span";
 import { DishesCard } from "interfaces/DishesCard";
+import { Link } from "react-router-dom";
+import { useShoppingCart } from "context/shoppingCartContext";
 
 const Card = styled.div`
   display: flex;
@@ -75,34 +77,61 @@ const InnerCardDetail = styled.div`
       width: 100%;
     `}
 `;
+interface MyInterface {
+  name: string;
+  type: string;
+  city: string;
+  restaurantId: string | number;
+}
 
-export const RestaurantCardList: React.FC = () => {
+export const RestaurantCardList: React.FC<MyInterface> = ({
+  name,
+  type,
+  city,
+  restaurantId,
+}: any) => {
   return (
-    <Card>
+    <Card as={Link} to={`${restaurantId}`}>
       <Image src={restaurant} />
       <CardDetail>
-        <Heading>Restaurant</Heading>
+        <Heading>{name}</Heading>
         <InnerCardDetail isDishes={false}>
-          <Span restaurant>10,00 pln</Span>
-          <Span restaurant>Obiad, śniadania</Span>
-          <Span restaurant>Kraków</Span>
+          {/* <Span restaurant>10,00 pln</Span> */}
+          <Span restaurant>{type}</Span>
+          <Span restaurant>{city}</Span>
         </InnerCardDetail>
       </CardDetail>
     </Card>
   );
 };
 
-export const DishesCardList: React.FC<DishesCard> = () => {
+export const DishesCardList: React.FC<DishesCard> = ({
+  id,
+  dishName,
+  dishPrice,
+}) => {
+  // console.log(data);
+  const {
+    getItemQuantity,
+    increaseCartQuantity,
+    // decreaseQuantity,
+    // removeFromCard,
+  } = useShoppingCart();
+  const quantity = getItemQuantity(id);
   return (
-    <Card>
-      <Image src={restaurant} />
-      <CardDetail>
-        <Heading>Hamburger</Heading>
-        <InnerCardDetail isDishes={true}>
-          <Span restaurant>10,00 pln</Span>
-          <Image icon src={add} />
-        </InnerCardDetail>
-      </CardDetail>
-    </Card>
+    <>
+      <Card onClick={() => increaseCartQuantity(id)}>
+        <Image src={restaurant} />
+        <CardDetail>
+          <Heading>{dishName}</Heading>
+          <InnerCardDetail isDishes={true}>
+            <Span restaurant>{dishPrice} pln</Span>
+
+            {/* <Image src={add} icon /> */}
+          </InnerCardDetail>
+        </CardDetail>
+      </Card>
+      <span>{quantity}</span>
+    </>
   );
 };

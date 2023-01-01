@@ -4,9 +4,11 @@ import Input from "components/atoms/Input/Input";
 import { Footer } from "components/organisms/Footer/Footer";
 import { MyNavigation } from "components/organisms/Navigation/Navigation";
 import styled from "styled-components";
-import Axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { UserLogin } from "interfaces/Login";
+import { AuthContext } from "context/authContext";
+import { useNavigate } from "react-router";
+
 const LoginWrapper = styled.section`
   display: flex;
   flex-direction: column;
@@ -35,32 +37,23 @@ export const Login = () => {
     email: "",
     password: "",
   });
+  const { login } = useContext(AuthContext);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInputs((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
-  const handleLogin = (e: any) => {
+
+  const navigate = useNavigate();
+  const handleLogin = async (e: any) => {
     e.preventDefault();
-    fetch("http://localhost:8800/api/users/login", {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify(inputs),
-    });
-    // try {
-    //   let result = await Axios.post(
-    //     "http://localhost:8800/api/users/login",
-    //     inputs
-    //   ).catch((err) => {
-    //     if (err.response) {
-    //       console.log(err.response.data);
-    //     }
-    //     console.log(result);
-    //   });
-    // } catch (error: any | undefined) {
-    //   console.error(error.response.data);
-    // }
+    try {
+      await login(inputs);
+      navigate("/");
+    } catch (error: any | undefined) {
+      console.error(error.response.data);
+    }
   };
 
   return (
@@ -78,6 +71,7 @@ export const Login = () => {
           <Input
             form
             placeholder="Hasło"
+            type="password"
             name="password"
             onChange={handleChange}
           />

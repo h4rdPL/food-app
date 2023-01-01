@@ -94,7 +94,6 @@ export const Register: React.FC = () => {
         ).catch((err) => {
           if (err.response) {
             console.log(err.response.data);
-
             setError(true);
             setErrorMessage(err.response.data);
           }

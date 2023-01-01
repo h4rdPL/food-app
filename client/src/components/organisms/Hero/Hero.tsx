@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled, { keyframes } from "styled-components";
+import { Heading } from "components/atoms/Heading/Heading";
+import { Span } from "components/atoms/Span/Span";
+import { AuthContexProvider, AuthContext } from "context/authContext";
+import { useLocation, Navigate, useNavigate } from "react-router-dom";
 import Paragraph from "components/atoms/Paragraph/Paragraph";
 import Button from "components/atoms/Button/Button";
 import shoppingOnline from "assets/images/online-shop.svg";
 import Input from "components/atoms/Input/Input";
-import { Heading } from "components/atoms/Heading/Heading";
-import { Span } from "components/atoms/Span/Span";
+import Axios from "axios";
 import close from "assets/images/icons/close-black.svg";
+import { convertToObject } from "typescript";
+
 const HeroWrapper = styled.section`
   position: relative;
   display: flex;
@@ -78,48 +83,74 @@ const SearchOrderWrapper = styled.div`
     flex-direction: row;
   }
 `;
+
 export const Hero: React.FC = () => {
-  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [input, setInput] = useState({
+    visitorsPlace: "",
+  });
   const [error, setError] = useState<boolean>(false);
-  const [isOpen, setIsOpen] = useState<any>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { currentUser } = useContext(AuthContext);
+
   const closeModal = () => {
     setIsOpen(!isOpen);
   };
   const openModal = () => {
     setIsOpen(!isOpen);
   };
-
-  const searchRestaurant = () => {
-    console.log("hey");
-    if (!isLogin) {
-      setIsOpen(!isOpen);
-      setError(true);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setInput((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  const navigate = useNavigate();
+  const searchRestaurant = async () => {
+    setIsOpen(!isOpen);
+    navigate("/app");
+    try {
+      currentUser ? setError(false) : setError(true);
+      let result = await Axios.post(
+        "http://localhost:8800/api/app/restaurantList",
+        input
+      );
+      console.log(result);
+    } catch (err) {
+      console.error(err);
     }
   };
-
   return (
-    <>
-      <HeroWrapper>
-        <HeroInner>
-          <Heading title>
-            Najszybsza dostawa <br /> Najlepszego jedzenia
-          </Heading>
-          <Paragraph>Dołącz do nas już teraz!</Paragraph>
-          <Button onClick={openModal}> Zamów online</Button>
-          {error && <Span error>Wygląda na to, że nie jesteś zalogowany!</Span>}
-          {isOpen && (
-            <ModalWrapper>
-              <Image onClick={closeModal} src={close} />
-              <Heading>Gdzie chcesz zamówić jedzenie?</Heading>
-              <SearchOrderWrapper>
-                <Input placeholder="Np. Nowy Targ" />
-                <Button onClick={searchRestaurant}>Szukaj restauracji</Button>
-              </SearchOrderWrapper>
-            </ModalWrapper>
-          )}
-        </HeroInner>
-        <HeroImage src={shoppingOnline} />
-      </HeroWrapper>
-    </>
+    <AuthContexProvider>
+      <>
+        <HeroWrapper>
+          <HeroInner>
+            <Heading title>
+              Najszybsza dostawa <br /> Najlepszego jedzenia
+            </Heading>
+            <Paragraph>Dołącz do nas już teraz!</Paragraph>
+            <Button onClick={openModal}> Zamów online</Button>
+
+            {error && (
+              <Span error>Wygląda na to, że nie jesteś zalogowany!</Span>
+            )}
+            {isOpen && (
+              <ModalWrapper>
+                <Image onClick={closeModal} src={close} />
+                <Heading>Gdzie chcesz zamówić jedzenie?</Heading>
+                <SearchOrderWrapper>
+                  <Input
+                    name="visitorsPlace"
+                    onChange={handleChange}
+                    placeholder="Np. Nowy Targ"
+                  />
+                  <Button onClick={searchRestaurant}>Szukaj restauracji</Button>
+                </SearchOrderWrapper>
+              </ModalWrapper>
+            )}
+          </HeroInner>
+          <HeroImage src={shoppingOnline} />
+        </HeroWrapper>
+      </>
+    </AuthContexProvider>
   );
 };

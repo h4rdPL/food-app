@@ -6,6 +6,7 @@ import { Login } from "pages/Login/Login";
 import { Register } from "pages/Register/Register";
 import { RestaurantList } from "pages/Restaurant/RestaurantList";
 import { CardList } from "pages/Restaurant/RestaurantList";
+import { UserPage } from "pages/Users/Users";
 import { createBrowserRouter } from "react-router-dom";
 export const router = createBrowserRouter([
   {
@@ -34,12 +35,17 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
+    path: "/profile",
+    element: <UserPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
     path: "/app",
     element: <RestaurantList />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/app/restaurant_name",
+    path: "/app/:id",
     element: <CardList />,
     errorElement: <ErrorPage />,
   },

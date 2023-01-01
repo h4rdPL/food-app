@@ -6,7 +6,7 @@ export default {
 };
 
 const Template = () => {
-  return <RestaurantList />;
+  // return <RestaurantList />;
 };
 
 const SecondaryTemplate = () => {

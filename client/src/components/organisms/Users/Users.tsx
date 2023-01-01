@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Heading, SubHeading } from "components/atoms/Heading/Heading";
 import Paragraph from "components/atoms/Paragraph/Paragraph";
 import styled from "styled-components";
 import close from "assets/images/icons/close.svg";
 import Button from "components/atoms/Button/Button";
+import { AuthContext } from "context/authContext";
+import { useShoppingCart } from "context/shoppingCartContext";
 const UserWrapper = styled.div`
   min-height: 80vh;
   width: 80%;
@@ -74,65 +76,37 @@ const Image = styled.img`
   cursor: pointer;
   align-self: center;
 `;
-const StyledParagraph = styled(Paragraph)`
-  text-align: center;
-  margin-top: 2rem;
-`;
 export const User = () => {
-  const [isEmpty, setIsEmpty] = useState(true);
-
+  const { currentUser } = useContext(AuthContext);
+  const { cartItems } = useShoppingCart();
+  console.log(cartItems);
   // eslint-disable-next-line no-lone-blocks
   {
-    if (isEmpty) {
-      return (
-        <UserWrapper>
-          <Heading title>
-            Dzień dobry, <br /> użytkownik
-          </Heading>
-          <UserInner>
-            <StyledHeading>Podsumowanie</StyledHeading>
-            <Summary>
+    return (
+      <UserWrapper>
+        <Heading title>
+          Dzień dobry, <br /> {currentUser?.name}
+        </Heading>
+        <UserInner>
+          <StyledHeading>Podsumowanie</StyledHeading>
+          <Summary>
+            {cartItems.map((item) => (
+              // <Paragraph key={item.id} {...item} />
               <SummaryItem>
-                <Paragraph>Hamburger</Paragraph>
+                <Paragraph>{item.id}</Paragraph>
                 <PriceWrapper>
-                  <Paragraph>10PLN</Paragraph>
+                  <Paragraph>{item.quantity}</Paragraph>
                   <Image src={close} />
                 </PriceWrapper>
               </SummaryItem>
-              <SummaryItem>
-                <Paragraph>Hamburger</Paragraph>
-                <PriceWrapper>
-                  <Paragraph>10PLN</Paragraph>
-                  <Image src={close} />
-                </PriceWrapper>
-              </SummaryItem>
-              <SummaryItem>
-                <Paragraph>Hamburger</Paragraph>
-                <PriceWrapper>
-                  <Paragraph>10PLN</Paragraph>
-                  <Image src={close} />
-                </PriceWrapper>
-              </SummaryItem>
-              <TotalWrapper>
-                <SubHeading>Razem: 40.00PLN</SubHeading>
-                <Button>Kup teraz</Button>
-              </TotalWrapper>
-            </Summary>
-          </UserInner>
-        </UserWrapper>
-      );
-    } else {
-      return (
-        <UserWrapper>
-          <Heading title>
-            Dzień dobry, <br /> użytkownik
-          </Heading>
-          <UserInner>
-            <StyledHeading>Podsumowanie</StyledHeading>
-            <StyledParagraph>Nie ma zamówień</StyledParagraph>
-          </UserInner>
-        </UserWrapper>
-      );
-    }
+            ))}
+            <TotalWrapper>
+              <SubHeading>Razem: 40.00PLN</SubHeading>
+              <Button>Kup teraz</Button>
+            </TotalWrapper>
+          </Summary>
+        </UserInner>
+      </UserWrapper>
+    );
   }
 };
