@@ -102,7 +102,15 @@ export const User = () => {
               </SummaryItem>
             ))}
             <TotalWrapper>
-              <SubHeading>Razem:</SubHeading>
+              <SubHeading>
+                Razem:
+                {cartItems.reduce(
+                  (accumulator, curr) =>
+                    accumulator + curr.dishPrice * curr.quantity,
+                  0
+                )}{" "}
+                PLN
+              </SubHeading>
               <Button>Kup teraz</Button>
             </TotalWrapper>
           </Summary>
