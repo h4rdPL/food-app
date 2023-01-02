@@ -120,7 +120,9 @@ export const DishesCardList: React.FC<DishesCard> = ({
   const quantity = getItemQuantity(id);
   return (
     <>
-      <Card onClick={() => increaseCartQuantity(id)}>
+      <Card
+        onClick={() => increaseCartQuantity(id, dishName, dishPrice, quantity)}
+      >
         <Image src={restaurant} />
         <CardDetail>
           <Heading>{dishName}</Heading>

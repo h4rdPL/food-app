@@ -78,7 +78,7 @@ const Image = styled.img`
 `;
 export const User = () => {
   const { currentUser } = useContext(AuthContext);
-  const { cartItems } = useShoppingCart();
+  const { cartItems, removeFromCard } = useShoppingCart();
   console.log(cartItems);
   // eslint-disable-next-line no-lone-blocks
   {
@@ -93,15 +93,16 @@ export const User = () => {
             {cartItems.map((item) => (
               // <Paragraph key={item.id} {...item} />
               <SummaryItem>
-                <Paragraph>{item.id}</Paragraph>
+                {console.log(item)}
+                <Paragraph>{item.dishName}</Paragraph>
                 <PriceWrapper>
                   <Paragraph>{item.quantity}</Paragraph>
-                  <Image src={close} />
+                  <Image onClick={() => removeFromCard(item.id)} src={close} />
                 </PriceWrapper>
               </SummaryItem>
             ))}
             <TotalWrapper>
-              <SubHeading>Razem: 40.00PLN</SubHeading>
+              <SubHeading>Razem:</SubHeading>
               <Button>Kup teraz</Button>
             </TotalWrapper>
           </Summary>
