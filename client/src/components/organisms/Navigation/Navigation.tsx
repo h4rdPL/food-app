@@ -135,6 +135,7 @@ const ButtonWrapper = styled.div`
 // `;
 
 const StyledButton = styled(Button)`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -149,6 +150,20 @@ const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.black};
   &:hover {
     color: ${({ theme }) => theme.orangeGradient};
+  }
+`;
+
+const CartQuantity = styled.span`
+  font-size: 0.9rem;
+  font-weight: bold;
+  position: absolute;
+  right: 2%;
+  padding: 0.4rem 0.8rem;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.orangeGradient};
+  @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {
+    right: -8%;
+    bottom: -25%;
   }
 `;
 
@@ -198,7 +213,7 @@ export const MyNavigation = () => {
             )}
             {currentUser ? (
               <StyledButton as={Link} to="/profile">
-                {currentUser && <span>{cartQuantity}</span>}
+                {currentUser && <CartQuantity>{cartQuantity}</CartQuantity>}
                 {currentUser.isBusinessPartner
                   ? "Moja restauracja"
                   : "Mój koszyk"}
