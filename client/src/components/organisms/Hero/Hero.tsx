@@ -11,6 +11,7 @@ import Input from "components/atoms/Input/Input";
 import Axios from "axios";
 import close from "assets/images/icons/close-black.svg";
 import { convertToObject } from "typescript";
+import { useShoppingCart } from "context/shoppingCartContext";
 
 const HeroWrapper = styled.section`
   position: relative;
@@ -85,12 +86,12 @@ const SearchOrderWrapper = styled.div`
 `;
 
 export const Hero: React.FC = () => {
-  const [input, setInput] = useState({
+  const [input, setInput] = useState<any>({
     visitorsPlace: "",
   });
   const [error, setError] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { currentUser } = useContext(AuthContext);
+  // const { currentUser } = useContext(AuthContext);
 
   const closeModal = () => {
     setIsOpen(!isOpen);
@@ -99,24 +100,22 @@ export const Hero: React.FC = () => {
     setIsOpen(!isOpen);
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setInput((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    setInput({
+      visitorsPlace: e.target.value,
+    });
   };
   const navigate = useNavigate();
   const searchRestaurant = async () => {
     setIsOpen(!isOpen);
     navigate("/app");
+    console.log(input);
     try {
-      currentUser ? setError(false) : setError(true);
-      let result = await Axios.post(
-        "http://localhost:8800/api/app/restaurantList",
+      await Axios.post(
+        "http://localhost:8800/api/restaurant/allRestaurants",
         input
       );
-      console.log(result);
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   };
   return (
@@ -128,7 +127,8 @@ export const Hero: React.FC = () => {
               Najszybsza dostawa <br /> Najlepszego jedzenia
             </Heading>
             <Paragraph>Dołącz do nas już teraz!</Paragraph>
-            <Button onClick={openModal}> Zamów online</Button>
+            {/* <Button onClick={openModal}> Zamów online</Button> */}
+            <Button onClick={searchRestaurant}> Zamów online</Button>
 
             {error && (
               <Span error>Wygląda na to, że nie jesteś zalogowany!</Span>

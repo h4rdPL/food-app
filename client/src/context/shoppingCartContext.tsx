@@ -11,6 +11,7 @@ interface CartItem {
   dishPrice: number;
   dishName: string;
 }
+
 interface ShoppingCartContextProps {
   //   getItemQuantity: (id: number) => number | string;
   getItemQuantity: (id: number) => number;
@@ -22,6 +23,7 @@ interface ShoppingCartContextProps {
   ) => void;
   decreaseQuantity: (id: number) => void;
   removeFromCard: (id: number) => void;
+  getFilteredResult: (name: string) => void;
   endPrice: any;
   cartQuantity: number;
   cartItems: CartItem[];
@@ -42,14 +44,12 @@ export const ShoppingCartProvider = ({
   const getItemQuantity = (dishId: number) => {
     return cartItems.find((item) => item.id === dishId)?.quantity || 0;
   };
-
   const increaseCartQuantity = async (
     id: number,
     dishName: string,
     dishPrice: number,
     quantity: number
   ) => {
-    console.log("hey");
     try {
       await Axios.post(
         "http://localhost:8800/api/restaurant/addQuantity",
@@ -93,7 +93,6 @@ export const ShoppingCartProvider = ({
     });
   };
   const removeFromCard = (id: number) => {
-    console.log("hey");
     setCartItems((prev) => {
       return prev.filter((item) => item.id !== id);
     });
@@ -102,6 +101,7 @@ export const ShoppingCartProvider = ({
     (quantity, item) => item.quantity + quantity,
     0
   );
+  const getFilteredResult = async () => {};
   return (
     <ShoppingCartContext.Provider
       value={{
@@ -109,6 +109,7 @@ export const ShoppingCartProvider = ({
         increaseCartQuantity,
         decreaseQuantity,
         removeFromCard,
+        getFilteredResult,
         cartQuantity,
         cartItems,
         endPrice,

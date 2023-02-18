@@ -10,7 +10,7 @@ const whitelist = [
   "http://localhost:3000/*",
   "http://localhost:3000/profile",
   "http://localhost:3000/app",
-  "http://localhost:3000/app/*",
+  "http://localhost:8800/api/restaurant/getDishes",
 ];
 const corsOptions = {
   origin: function (origin, callback) {
@@ -21,18 +21,11 @@ const corsOptions = {
     }
   },
   credentials: true,
-  withCredentials: true,
   optionSuccessStatus: 200,
 };
-// const corsOptions = {
-//   // we have to allow access to our client if we want to send the cookies
-//   // origin: "http://localhost:3000",
-//   // origin: "http://localhost:3000",
-//   credentials: true,
-//   optionSuccessStatus: 200,
-// };
-
 app.use(cookieParser());
+app.use(bodyParser.json({ limit: "1200mb" }));
+app.use(bodyParser.urlencoded({ limit: "1200mb", extended: true }));
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 // it allows us to sent data to db

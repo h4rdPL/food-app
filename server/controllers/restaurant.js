@@ -1,8 +1,24 @@
 import { db } from "../config/db.js";
 import express from "express";
+import multer from "multer";
 import url from "url";
+// const storage = multer.memoryStorage();
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./");
+  },
+  filename: function (req, file, cb) {
+    const ext = file.mimetype.split("/")[1];
+    cb(null, `uploads/${file.originalname}-${Date.now()}.${ext}`);
+  },
+});
+const upload = multer({
+  storage,
+});
 export const addNewRestaurant = (req, res) => {
   const data = req.body;
+
+  console.log(data.restaurantPhoto);
   const values = [
     data.currentUser.id,
     data.restaurantName,
@@ -19,27 +35,35 @@ export const addNewRestaurant = (req, res) => {
   });
 };
 export const selectFilteredRestaurant = (req, res) => {
-  // const q = "SELECT * FROM restaurants";
-  // db.query(db, q, (err, data) => {
-  //   if (err) return res.status(500).json(err);
-  //   returnres.status(200).json(data);
-  // });
-};
-
-export const getAllRestaurant = (req, res) => {
   const q = "SELECT * FROM restaurants";
-  db.query(q, (err, data) => {
+  db.query(db, q, (err, data) => {
     if (err) return res.status(500).json(err);
-    return res.status(200).json(data);
+    returnres.status(200).json(data);
   });
 };
 
-export const addNewDishes = (req, res) => {
-  console.log(req.body);
-  const dish = req.body;
+export const getAllRestaurant = (req, res) => {
+  let city;
+  if (req.method === "POST") {
+    city = req.body["visitorsPlace"];
+  } else if (req.method === "GET") {
+    city = req.query.visitorsPlace;
+  }
+  console.log(city);
+  // const q = `SELECT * FROM restaurants WHERE address LIKE '%${city}%'`;
+  const q = "SELECT * FROM restaurants";
+  console.log(q);
+  db.query(q, [city], (err, data) => {
+    if (err) return res.status(500).json(err);
+    console.log(data);
 
+    return res.status(200).json(data);
+  });
+};
+export const addNewDishes = (req, res) => {
+  const dish = req.body;
   const q1 =
-    "SELECT id, restaurant_name FROM restaurants WHERE restaurant_name= ?";
+    "SELECT id, restaurant_name FROM restaurants WHERE restaurant_name = ?";
   db.query(q1, [dish.restaurantName], (err, data) => {
     const values = [
       dish.dishName,
@@ -65,7 +89,6 @@ export const addNewDishes = (req, res) => {
 };
 
 export const getDishes = (req, res) => {
-  // const { userID } = req.params;
   const requestUrl = req.url;
   const parsedUrl = url.parse(requestUrl, true);
   const pathname = parsedUrl.query.id;

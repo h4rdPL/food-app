@@ -1,7 +1,7 @@
 export interface Restaurant {
   restaurantName: string;
   dishesType: string;
-  restaurantPhoto: object | null;
+  restaurantPhoto: any;
   restaurantPlace: string;
   currentUser: object;
 }

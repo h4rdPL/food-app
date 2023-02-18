@@ -7,7 +7,13 @@ export default {
 
 const Template = () => {
   return (
-    <RestaurantCardList name="sda" type="pizza" city="asd" restaurantId={`2`} />
+    <RestaurantCardList
+      name="sda"
+      type="pizza"
+      city="asd"
+      restaurantId={`2`}
+      restaurantPhoto="asd"
+    />
   );
 };
 

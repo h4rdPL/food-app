@@ -1,5 +1,5 @@
 import React from "react";
-import add from "assets/images/icons/add.svg";
+// import add from "assets/images/icons/add.svg";
 import styled, { css } from "styled-components";
 import restaurant from "assets/images/restaurant.jpg";
 import { Heading } from "components/atoms/Heading/Heading";
@@ -9,11 +9,18 @@ import { Link } from "react-router-dom";
 import { useShoppingCart } from "context/shoppingCartContext";
 
 const Card = styled.div`
-  display: flex;
+  width: 300px;
+  height: 300px;
+  border-radius: 25px;
+  border: 1px solid red;
+  background-image: ${({ restaurantPhoto }) => `url(${restaurantPhoto}`};
+  /* background-image: ${restaurant}; */
+  /* display: flex;
   flex-direction: column;
   position: relative;
   cursor: pointer;
   width: 70%;
+  height: 200px;
   @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {
     flex-direction: row;
   }
@@ -36,7 +43,7 @@ const Card = styled.div`
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.laptop}) {
     width: 40%;
-  }
+  } */
 `;
 const Image = styled.img`
   max-height: 220px;
@@ -82,6 +89,7 @@ interface MyInterface {
   type: string;
   city: string;
   restaurantId: string | number;
+  restaurantPhoto: Blob | string;
 }
 
 export const RestaurantCardList: React.FC<MyInterface> = ({
@@ -89,18 +97,37 @@ export const RestaurantCardList: React.FC<MyInterface> = ({
   type,
   city,
   restaurantId,
+  restaurantPhoto,
 }: any) => {
+  window.Buffer = window.Buffer || require("buffer").Buffer;
+
   return (
-    <Card as={Link} to={`${restaurantId}`}>
-      <Image src={restaurant} />
-      <CardDetail>
-        <Heading>{name}</Heading>
-        <InnerCardDetail isDishes={false}>
-          {/* <Span restaurant>10,00 pln</Span> */}
-          <Span restaurant>{type}</Span>
-          <Span restaurant>{city}</Span>
-        </InnerCardDetail>
-      </CardDetail>
+    // <Card key={restaurantId} as={Link} to={`${restaurantId}`}>
+    //   <Image
+    //     src={`${Buffer.from(restaurantPhoto)}`}
+    //     alt={`${name}-${restaurantId}`}
+    //   />
+
+    //   <CardDetail>
+    //     <Heading>{name}</Heading>
+    //     <InnerCardDetail isDishes={false}>
+    //       <Span restaurant>{type}</Span>
+    //       <Span restaurant>{city}</Span>
+    //     </InnerCardDetail>
+    //   </CardDetail>
+    // </Card>
+    <Card
+      // style={{ backgroundImage: `url(${Buffer.from(restaurantPhoto)})` }}
+      // backgroundImage={restaurantPhoto}
+      key={restaurantId}
+      as={Link}
+      to={`${restaurantId}`}
+    >
+      <Image
+        src={`${Buffer.from(restaurantPhoto)}`}
+        alt={`${name}-${restaurantId}`}
+      />
+      {name}
     </Card>
   );
 };
@@ -110,13 +137,7 @@ export const DishesCardList: React.FC<DishesCard> = ({
   dishName,
   dishPrice,
 }) => {
-  // console.log(data);
-  const {
-    getItemQuantity,
-    increaseCartQuantity,
-    // decreaseQuantity,
-    // removeFromCard,
-  } = useShoppingCart();
+  const { getItemQuantity, increaseCartQuantity } = useShoppingCart();
   const quantity = getItemQuantity(id);
   return (
     <>
@@ -128,7 +149,6 @@ export const DishesCardList: React.FC<DishesCard> = ({
           <Heading>{dishName}</Heading>
           <InnerCardDetail isDishes={true}>
             <Span restaurant>{dishPrice} pln</Span>
-
             {/* <Image src={add} icon /> */}
           </InnerCardDetail>
         </CardDetail>

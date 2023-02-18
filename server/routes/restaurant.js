@@ -9,6 +9,7 @@ import {
 const router = express.Router();
 router.post("/add", addNewRestaurant);
 // router.post("/restaurantList", selectFilteredRestaurant);
+router.post("/allRestaurants", getAllRestaurant);
 router.get("/allRestaurants", getAllRestaurant);
 router.post("/addDishes", addNewDishes);
 router.get("/getDishes", getDishes);

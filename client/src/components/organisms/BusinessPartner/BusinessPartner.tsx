@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
-import Button from "components/atoms/Button/Button";
 import { Heading } from "components/atoms/Heading/Heading";
+import Button from "components/atoms/Button/Button";
 import Input from "components/atoms/Input/Input";
 import Paragraph from "components/atoms/Paragraph/Paragraph";
 import styled from "styled-components";
@@ -68,29 +68,42 @@ export const BusinessPartner = () => {
 
   const addRestaurant = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+    console.log(restaurantData);
+    const config = {
+      headers: {
+        Accept: "multipart/form-data",
+      },
+      credentials: "include",
+    };
     try {
       await Axios.post(
         "http://localhost:8800/api/restaurant/add",
-        restaurantData
+        restaurantData,
+        config
       ).catch((err) => console.log(err));
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleChangeRestaurant = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRestaurant = (e: any) => {
     setRestaurantData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-      restaurantPhoto: e.target.files,
     }));
   };
 
-  const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRestaurantData((prev) => ({
-      ...prev,
-      restaurantPhoto: e.target.files,
-    }));
+  const handleChangeFile = (e: any) => {
+    console.log(e.target.files);
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setRestaurantData((prev) => ({
+        ...prev,
+        restaurantPhoto: reader.result,
+      }));
+    };
   };
 
   const addDish = async (e: React.ChangeEvent<HTMLButtonElement>) => {
@@ -98,22 +111,24 @@ export const BusinessPartner = () => {
     try {
       await Axios.post(
         "http://localhost:8800/api/restaurant/addDishes",
-        dishData
+        restaurantData
       ).catch((err) => console.log(err));
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleChangeDishPhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDishData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-      dishPhoto: e.target.files,
-    }));
-  };
+  // const handleChangeDishPhoto = (e: any) => {
+  //   // setFile(e.target.files);
+  //   // setDishData(() => ({
+  //   //   // ...prev,
+  //   //   // [e.target.name]: e.target.value,
+  //   //   // dishPhoto: e.target.files[0],
+  //   // }));
+  // };
   return (
     <BusinessPartnerWrapper>
+      {console.log(restaurantData)}
       <StyledHeading title>
         Dzień dobry, <br />
         {currentUser ? currentUser.name : null}
@@ -141,6 +156,7 @@ export const BusinessPartner = () => {
           />
           <Input
             file
+            // enctype="multipart/form-data"
             name="restaurantPhoto"
             type="file"
             onChange={handleChangeFile}
@@ -172,7 +188,7 @@ export const BusinessPartner = () => {
             file
             name="dishPhoto"
             type="file"
-            onClick={handleChangeDishPhoto}
+            // onClick={handleChangeDishPhoto}
           />
           <StyledButton onClick={addDish}>Dodaj</StyledButton>
         </Form>
